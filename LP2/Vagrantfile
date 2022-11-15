@@ -1,0 +1,17 @@
+ENV["VAGRANT_EXPERIMENTAL"] = "disks"
+
+Vagrant.configure("2") do |config|
+  config.vm.define "hashicorp" do |h|
+  config.vm.network :forwarded_port, host: 8080, guest: 80
+  config.vm.synced_folder "/home/user01/manual_kernel_update/manual_kernel_update", "/var/manual_kernel_update"
+    h.vm.box = "startlook/centos-7-9"
+    h.vm.provider :virtualbox
+
+     (0..1).each do |i|
+      h.vm.disk :disk, size: "5GB", name: "disk-#{i}"
+    
+  config.vm.provision "shell",
+  path: "make_raid1.sh"
+    end	 
+  end
+end
