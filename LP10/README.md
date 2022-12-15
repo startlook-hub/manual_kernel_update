@@ -12,9 +12,9 @@
 ```
 #!/usr/bin/env bash
 echo -e "\nСписок IP адресов с наибольшим кол-вом запросов \n" >> /tmp/send_nginx.log
-cat /var/log/nginx/access.log | cut -d' ' -f1 | sort | uniq -c | sort -nr | tail -n20 >> /tmp/send_nginx.log
+cat /var/log/nginx/access.log | cut -d' ' -f1 | sort | uniq -c | sort -nr | tail -n10 >> /tmp/send_nginx.log
 echo -e "\nОбщее количество запросов \n" >> /tmp/send_nginx.log
-cat /var/log/nginx/access.log | cut -d' ' -f1 | sort | uniq -c | sort -nr | tail -n20 | awk '{print $1}' | awk '{sum += $1} END {print sum}'  >> /tmp/send_nginx.log
+cat /var/log/nginx/access.log | cut -d' ' -f1 | sort | uniq -c | sort -nr | tail -n10 | awk '{print $1}' | awk '{sum += $1} END {print sum}'  >> /tmp/send_nginx.log
 
 echo -e "\nСписок кодов ответа HTTP сервера \n" >> /tmp/send_nginx.log
 awk '{print $9}' /var/log/nginx/access.log | sort | uniq -c | sort -rn  >> /tmp/send_nginx.log
