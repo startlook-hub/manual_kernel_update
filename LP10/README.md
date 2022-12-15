@@ -36,3 +36,5 @@ mail -v -s "Лог работы nginx на сервере $HOSTNAME" -a /tmp/send_nginx.log -S smt
 ```
 0 */1 * * * /usr/bin/flock -xn /var/lock/send_nginx.lock -c 'sh /home/user01/scripts/nginx_log_script.sh'
 ```
+
+Как сделать выборку по времени "за последний час" я пока не разобрался, из не очень хороших идей взять текущую дату через date и сравнивать с ней все вхождения по столбцу '{print $4}' циклом :unamused:
